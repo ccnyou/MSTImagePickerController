@@ -74,10 +74,13 @@ NSString *const kIQTextFieldReturnKeyType   =   @"kIQTextFieldReturnKeyType";
     return self;
 }
 
--(NSDictionary*)textFieldCachedInfo:(UITextField*)textField
+-(NSDictionary*)textFieldCachedInfo:(UIView *)textField
 {
-    for (NSDictionary *infoDict in textFieldInfoCache)
-        if (infoDict[kIQTextField] == textField)  return infoDict;
+    for (NSDictionary *infoDict in textFieldInfoCache) {
+        if (infoDict[kIQTextField] == textField) {
+            return infoDict;
+        }
+    }
     
     return nil;
 }

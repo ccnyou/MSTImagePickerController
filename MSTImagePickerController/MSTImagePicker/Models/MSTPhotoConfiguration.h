@@ -141,7 +141,6 @@
 @property (strong, nonatomic) UIImage *cameraImage;
 
 
-
 /**
  单例方法
  */

@@ -9,7 +9,9 @@
 #import "UIView+MSTUtils.h"
 
 @implementation UIView (MST)
+
 #pragma mark - Frame
+
 - (CGFloat)mst_left {
     return self.frame.origin.x;
 }
@@ -116,8 +118,8 @@
 }
 
 
-
 #pragma mark - SubView
+
 - (UIView *)mst_subviewWithTag:(NSInteger)tag {
     for (UIView *sub in self.subviews) {
         if (sub.tag == tag)
@@ -136,7 +138,7 @@
 - (void)mst_removeViewWithTag:(NSInteger)tag {
     if (tag == 0)
         return;
-    
+
     UIView *view = [self viewWithTag:tag];
     if (view)
         [view removeFromSuperview];
@@ -147,11 +149,13 @@
         [sub removeFromSuperview];
     }
 }
+
 - (void)mst_removeViewWithTags:(NSArray *)tagArray {
     for (NSNumber *num in tagArray) {
         [self mst_removeViewWithTag:[num integerValue]];
     }
 }
+
 - (void)mst_removeViewWithTagLessThan:(NSInteger)tag {
     NSMutableArray *views = [NSMutableArray array];
     for (UIView *view in self.subviews) {
@@ -160,6 +164,7 @@
     }
     [self mst_removeSubViewArray:views];
 }
+
 - (void)mst_removeViewWithTagGreaterThan:(NSInteger)tag {
     NSMutableArray *views = [NSMutableArray array];
     for (UIView *view in self.subviews) {
@@ -170,18 +175,20 @@
 }
 
 #pragma mark - View Controller
+
 - (UIViewController *)mst_responderViewController {
-    for (UIView* next = [self superview]; next; next = next.superview) {
-        UIResponder* nextResponder = [next nextResponder];
+    for (UIView *next = [self superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
         if ([nextResponder isKindOfClass:[UIViewController class]])
-            return (UIViewController*)nextResponder;
+            return (UIViewController *)nextResponder;
     }
     return nil;
 }
 
 #pragma mark - Draw Rect
+
 - (void)mst_circular {
-    [self mst_cornerRadius:self.mst_width/2.0];
+    [self mst_cornerRadius:self.mst_width / 2.0];
 }
 
 - (void)mst_cornerRadius:(CGFloat)radius {
@@ -190,7 +197,9 @@
 }
 
 - (void)mst_corners:(UIRectCorner)corners cornerRadius:(CGFloat)radius {
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corners cornerRadii:CGSizeMake(radius,radius)];
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
+                                                   byRoundingCorners:corners
+                                                         cornerRadii:CGSizeMake(radius, radius)];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
     maskLayer.frame = self.bounds;
     maskLayer.path = maskPath.CGPath;
@@ -211,13 +220,13 @@
     CASpringAnimation *springAnimation = [CASpringAnimation animationWithKeyPath:@"transform.scale"];
     springAnimation.fromValue = @1;
     springAnimation.toValue = @1.01;
-    
+
     springAnimation.mass = 1;
     springAnimation.damping = 7;
     springAnimation.stiffness = 50;
     springAnimation.duration = 0.2f;
     springAnimation.initialVelocity = 200.f;
-    
+
     [self.layer addAnimation:springAnimation forKey:nil];
 }
 

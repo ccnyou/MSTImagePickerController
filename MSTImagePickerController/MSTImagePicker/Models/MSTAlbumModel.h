@@ -14,7 +14,7 @@
 /**
  相册名
  */
-@property (copy  , nonatomic) NSString *albumName;
+@property (copy, nonatomic) NSString *albumName;
 
 /**
  是否是『相机胶卷』
@@ -31,6 +31,6 @@
  */
 @property (strong, nonatomic) PHFetchResult *content;
 
-@property (strong, nonatomic) NSArray <MSTAssetModel *>*models;
+@property (strong, nonatomic) NSArray <MSTAssetModel *> *models;
 
 @end

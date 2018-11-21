@@ -17,10 +17,22 @@
         _textLabel.font = [UIFont systemFontOfSize:15];
         _textLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_textLabel];
-        
-        NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:_textLabel attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeading multiplier:1 constant:10];
-        NSLayoutConstraint *vertical = [NSLayoutConstraint constraintWithItem:_textLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
-        
+
+        NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:_textLabel
+                                                                   attribute:NSLayoutAttributeLeading
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:self
+                                                                   attribute:NSLayoutAttributeLeading
+                                                                  multiplier:1
+                                                                    constant:10];
+        NSLayoutConstraint *vertical = [NSLayoutConstraint constraintWithItem:_textLabel
+                                                                    attribute:NSLayoutAttributeCenterY
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:self
+                                                                    attribute:NSLayoutAttributeCenterY
+                                                                   multiplier:1
+                                                                     constant:0];
+
         [self addConstraints:@[leading, vertical]];
     }
     return _textLabel;

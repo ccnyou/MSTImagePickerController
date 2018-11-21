@@ -9,6 +9,7 @@
 #import "MSTPhotoConfiguration.h"
 
 @class MSTAssetModel;
+
 @interface MSTMoment : NSObject
 
 @property (strong, nonatomic) NSDateComponents *dateComponents;
@@ -17,6 +18,6 @@
 
 @property (assign, nonatomic) MSTImageMomentGroupType groupType;
 
-@property (strong, nonatomic) NSMutableArray <MSTAssetModel *>*assets;
+@property (strong, nonatomic) NSMutableArray <MSTAssetModel *> *assets;
 
 @end

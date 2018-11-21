@@ -14,15 +14,9 @@
 
 @implementation DisplayCollectionViewCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    
-    
-}
-
 - (void)setImage:(UIImage *)image {
     _image = image;
-    
+
     self.imageView.image = image;
 }
 
@@ -33,15 +27,40 @@
         _imageView.contentMode = UIViewContentModeScaleAspectFill;
         _imageView.clipsToBounds = YES;
         _imageView.backgroundColor = [UIColor whiteColor];
-        
+
         [self.contentView addSubview:_imageView];
-        
-        NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:_imageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1 constant:0];
-        NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:_imageView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeading multiplier:1 constant:0];
-        NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:_imageView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTrailing multiplier:1 constant:0];
-        NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:_imageView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+
+        NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:_imageView
+                                                               attribute:NSLayoutAttributeTop
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:self.contentView
+                                                               attribute:NSLayoutAttributeTop
+                                                              multiplier:1
+                                                                constant:0];
+        NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:_imageView
+                                                                   attribute:NSLayoutAttributeLeading
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:self.contentView
+                                                                   attribute:NSLayoutAttributeLeading
+                                                                  multiplier:1
+                                                                    constant:0];
+        NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:_imageView
+                                                                    attribute:NSLayoutAttributeTrailing
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:self.contentView
+                                                                    attribute:NSLayoutAttributeTrailing
+                                                                   multiplier:1
+                                                                     constant:0];
+        NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:_imageView
+                                                                  attribute:NSLayoutAttributeBottom
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self.contentView
+                                                                  attribute:NSLayoutAttributeBottom
+                                                                 multiplier:1
+                                                                   constant:0];
         [self.contentView addConstraints:@[top, leading, trailing, bottom]];
     }
     return _imageView;
 }
+
 @end

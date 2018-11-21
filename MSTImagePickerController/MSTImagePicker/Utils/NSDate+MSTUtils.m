@@ -12,7 +12,7 @@
 
 - (NSString *)stringByPhotosMomentsType:(MSTImageMomentGroupType)type {
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    
+
     switch (type) {
         case MSTImageMomentGroupTypeYear:
             //年

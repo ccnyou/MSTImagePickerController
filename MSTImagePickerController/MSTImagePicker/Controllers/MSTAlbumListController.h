@@ -9,7 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface MSTAlbumListController : UITableViewController
-
 @property (strong, nonatomic) UIImage *placeholderThumbnail;
-
 @end

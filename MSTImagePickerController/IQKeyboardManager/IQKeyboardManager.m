@@ -867,14 +867,14 @@ NSInteger const kIQPreviousNextButtonToolbarTag     =   -1005;
                     [self showLog:[NSString stringWithFormat:@"%@ Old UITextView.contentInset : %@",[strongSelf.textFieldView _IQDescription], NSStringFromUIEdgeInsets(textView.contentInset)]];
                     
                     //_isTextViewContentInsetChanged,  If frame is not change by library in past, then saving user textView properties  (Bug ID: #92)
-                    if (_isTextViewContentInsetChanged == NO)
+                    if (self->_isTextViewContentInsetChanged == NO)
                     {
-                        _startingTextViewContentInsets = textView.contentInset;
-                        _startingTextViewScrollIndicatorInsets = textView.scrollIndicatorInsets;
+                        self->_startingTextViewContentInsets = textView.contentInset;
+                        self->_startingTextViewScrollIndicatorInsets = textView.scrollIndicatorInsets;
                     }
                     
                     UIEdgeInsets newContentInset = textView.contentInset;
-                    newContentInset.bottom = _textFieldView.frame.size.height-textViewHeight;
+                    newContentInset.bottom = self->_textFieldView.frame.size.height-textViewHeight;
                     textView.contentInset = newContentInset;
                     textView.scrollIndicatorInsets = newContentInset;
                     strongSelf.isTextViewContentInsetChanged = YES;
@@ -1188,7 +1188,7 @@ NSInteger const kIQPreviousNextButtonToolbarTag     =   -1005;
                 [self showLog:[NSString stringWithFormat:@"Restoring %@ frame to : %@",[strongSelf.rootViewController _IQDescription],NSStringFromCGRect(strongSelf.topViewBeginRect)]];
                 //  Setting it's new frame
                 [strongSelf.rootViewController.view setFrame:strongSelf.topViewBeginRect];
-                _movedDistance = 0;
+                self->_movedDistance = 0;
 
                 //Animating content if needed (Bug ID: #204)
                 if (strongSelf.layoutIfNeededOnUpdate)

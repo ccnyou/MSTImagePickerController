@@ -10,7 +10,7 @@
 
 @implementation MSTMoment
 
-- (NSMutableArray <MSTAssetModel *>*)assets {
+- (NSMutableArray <MSTAssetModel *> *)assets {
     if (!_assets) {
         self.assets = [NSMutableArray array];
     }

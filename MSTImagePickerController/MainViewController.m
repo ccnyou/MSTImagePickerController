@@ -43,14 +43,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     _sourceType = 1;
 
     [self.sourceTypePickerView selectRow:1 inComponent:0 animated:NO];
 }
 
 - (IBAction)runButtonDidClicked:(UIButton *)sender {
-    MSTImagePickerAccessType type;
+    MSTImagePickerAccessType type = 0;
     switch (_sourceType) {
         case 0:
             type = MSTImagePickerAccessTypePhotosWithoutAlbums;
@@ -66,20 +66,20 @@
     }
     imagePicker = [[MSTImagePickerController alloc] initWithAccessType:type];
     [self mp_setupImagePickerController];
-    
+
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
 - (void)mp_setupImagePickerController {
     imagePicker.MSTDelegate = self;
-    
+
     imagePicker.maxSelectCount = _maxSelectedNum.text.intValue;
     imagePicker.numsInRow = _numberOfRow.text.intValue;
     imagePicker.mutiSelected = _isMultiSelected.isOn;
     imagePicker.masking = _isShowMasking.isOn;
     imagePicker.selectedAnimation = _isShowSelectedAnimation.isOn;
-    imagePicker.themeStyle = _showThemeType.selectedSegmentIndex;
-    imagePicker.photoMomentGroupType = _photoGroupType.selectedSegmentIndex;
+    imagePicker.themeStyle = (MSTImagePickerStyle)_showThemeType.selectedSegmentIndex;
+    imagePicker.photoMomentGroupType = (MSTImageMomentGroupType)_photoGroupType.selectedSegmentIndex;
     imagePicker.photosDesc = _isDesc.isOn;
     imagePicker.showAlbumThumbnail = _isShowThumbnail.isOn;
     imagePicker.showAlbumNumber = _isShowAlbumNum.isOn;
@@ -94,12 +94,14 @@
 }
 
 #pragma mark - UIScrollViewDelegate
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [_numberOfRow resignFirstResponder];
     [_maxSelectedNum resignFirstResponder];
 }
 
 #pragma mark - UIPickerViewDataSource & Delegate
+
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
@@ -108,12 +110,15 @@
     return 3;
 }
 
-- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(nullable UIView *)view {
+- (UIView *)pickerView:(UIPickerView *)pickerView
+            viewForRow:(NSInteger)row
+          forComponent:(NSInteger)component
+           reusingView:(nullable UIView *)view {
     UILabel *label = [[UILabel alloc] init];
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont systemFontOfSize:20];
     label.adjustsFontSizeToFitWidth = YES;
-    
+
     switch (row) {
         case 0:
             label.text = @"无相册界面，但直接进入相册胶卷";
@@ -137,32 +142,35 @@
 }
 
 #pragma mark - UICollectionViewDataSource & Delegate
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     NSLog(@"numberOfItems:%zi", _modelsArray.count);
-    return _modelsArray.count+1;
+    return _modelsArray.count + 1;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    DisplayCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellID" forIndexPath:indexPath];
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    DisplayCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellID"
+                                                                                forIndexPath:indexPath];
     if (indexPath.item >= _modelsArray.count) {
         cell.image = [UIImage imageNamed:@"icon_add"];
     } else {
-        MSTPickingModel *model = _modelsArray[indexPath.item];
+        MSTPickingModel *model = _modelsArray[(NSUInteger)indexPath.item];
         cell.image = model.image;
     }
-    
+
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item >= _modelsArray.count) {
         NSMutableArray *array = [NSMutableArray array];
-        
+
         for (int i = 0; i < _modelsArray.count; i++) {
-            MSTPickingModel *model = _modelsArray[i];
+            MSTPickingModel *model = _modelsArray[(NSUInteger)i];
             [array addObject:model.identifier];
         }
-        MSTImagePickerAccessType type;
+        MSTImagePickerAccessType type = MSTImagePickerAccessTypePhotosWithoutAlbums;
         switch (_sourceType) {
             case 0:
                 type = MSTImagePickerAccessTypePhotosWithoutAlbums;
@@ -173,26 +181,32 @@
             case 2:
                 type = MSTImagePickerAccessTypeAlbums;
                 break;
+            default:
+                break;
         }
         imagePicker = [[MSTImagePickerController alloc] initWithAccessType:type identifiers:array];
         [self mp_setupImagePickerController];
-        
+
         [self presentViewController:imagePicker animated:YES completion:nil];
     }
 }
 
 #pragma mark - MSTImagePickerControllerDelegate
+
 - (void)MSTImagePickerControllerDidCancel:(MSTImagePickerController *)picker {
     NSLog(@"mstImagePickerControllerDidCancel");
 }
 
-- (void)MSTImagePickerController:(MSTImagePickerController *)picker didFinishPickingMediaWithArray:(NSArray<MSTPickingModel *> *)array {
+- (void)MSTImagePickerController:(MSTImagePickerController *)picker
+  didFinishPickingMediaWithArray:(NSArray<MSTPickingModel *> *)array {
     _modelsArray = array;
     NSLog(@"difFinishArray:__%zi", array.count);
     [self.displayCollectionView reloadData];
 }
 
--(void)MSTImagePickerController:(MSTImagePickerController *)picker didFinishPickingVideoWithURL:(NSURL *)videoURL identifier:(NSString *)localIdentifier {
+- (void)MSTImagePickerController:(MSTImagePickerController *)picker
+    didFinishPickingVideoWithURL:(NSURL *)videoURL
+                      identifier:(NSString *)localIdentifier {
     NSLog(@"didfinishVideo:_url__%@___localIdentifier:%@", videoURL, localIdentifier);
 }
 

@@ -12,11 +12,11 @@
 
 + (instancetype)defaultConfiguration {
     static MSTPhotoConfiguration *config = nil;
-    
+
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         config = [[MSTPhotoConfiguration alloc] init];
-        
+
         config.mutiSelected = YES;
         config.maxSelectCount = 9;
         config.maxImageWidth = 1280;
@@ -38,17 +38,17 @@
         config.videoAutoSave = YES;
         config.videoMaximumDuration = 60.f;
         config.pickGIF = YES;
-        
+
         config.gridPadding = 4;
     });
-    
+
     return config;
 }
 
 - (CGFloat)gridWidth {
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
-    
-    return (screenSize.width-4) / (CGFloat)self.numsInRow - self.gridPadding;
+
+    return (screenSize.width - 4) / (CGFloat)self.numsInRow - self.gridPadding;
 }
 
 @end

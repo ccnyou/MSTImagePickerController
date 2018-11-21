@@ -12,6 +12,8 @@
 #import "MSTAlbumModel.h"
 #import "MSTPickingModel.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol MSTImagePickerControllerDelegate;
 
 @interface MSTImagePickerController : UINavigationController
@@ -234,3 +236,4 @@
 @end
 
 
+NS_ASSUME_NONNULL_END

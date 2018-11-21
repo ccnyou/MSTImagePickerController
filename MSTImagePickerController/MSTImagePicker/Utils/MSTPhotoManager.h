@@ -10,6 +10,7 @@
 #import "MSTImagePickerEnumeration.h"
 
 @class MSTAlbumModel, MSTMoment, MSTAssetModel;
+
 @interface MSTPhotoManager : NSObject
 
 /** 单例 */
@@ -21,7 +22,8 @@
  @param type 授权类型
  @param callBackBlock 回调
  */
-+ (void)checkAuthorizationStatusWithSourceType:(MSTImagePickerSourceType)type callBack:(void(^)(MSTImagePickerSourceType sourceType, MSTAuthorizationStatus status)) callBackBlock;
++ (void)checkAuthorizationStatusWithSourceType:(MSTImagePickerSourceType)type
+                                      callBack:(void (^)(MSTImagePickerSourceType sourceType, MSTAuthorizationStatus status))callBackBlock;
 
 /**
  读取『相机胶卷』的信息
@@ -31,7 +33,10 @@
  @param isOnlyShowImage 是否只显示图片
  @param completionBlock 返回数组<MSTAlbumModel>
  */
-- (void)loadCameraRollInfoisDesc:(BOOL)isDesc isShowEmpty:(BOOL)isShowEmpty isOnlyShowImage:(BOOL)isOnlyShowImage CompletionBlock:(void (^)(MSTAlbumModel *result))completionBlock;
+- (void)loadCameraRollInfoIsDesc:(BOOL)isDesc
+                     isShowEmpty:(BOOL)isShowEmpty
+                 isOnlyShowImage:(BOOL)isOnlyShowImage
+                 CompletionBlock:(void (^)(MSTAlbumModel *result))completionBlock;
 
 /**
  读取所有相册的信息
@@ -41,7 +46,10 @@
  @param isOnlyShowImage 是否只显示图片
  @param completionBlock 返回数组<MSTAlbumModel>
  */
-- (void)loadAlbumInfoIsShowEmpty:(BOOL)isShowEmpty isDesc:(BOOL)isDesc isOnlyShowImage:(BOOL)isOnlyShowImage CompletionBlock:(void(^)(PHFetchResult *customAlbum, NSArray *albumModelArray)) completionBlock;
+- (void)loadAlbumInfoIsShowEmpty:(BOOL)isShowEmpty
+                          isDesc:(BOOL)isDesc
+                 isOnlyShowImage:(BOOL)isOnlyShowImage
+                 CompletionBlock:(void (^)(PHFetchResult *customAlbum, NSArray *albumModelArray))completionBlock;
 
 /**
  保存图片到系统相册
@@ -49,7 +57,8 @@
  @param image           待保存图片
  @param completionBlock 回调
  */
-- (void)saveImageToSystemAlbumWithImage:(UIImage *)image completionBlock:(void(^)(PHAsset *asset, NSString *error))completionBlock;
+- (void)saveImageToSystemAlbumWithImage:(UIImage *)image
+                        completionBlock:(void (^)(PHAsset *asset, NSString *error))completionBlock;
 
 /**
  保存图片的到自定义相册，没有则创建
@@ -58,7 +67,9 @@
  @param albumName       自定义相册名称
  @param completionBlock 回调
  */
-- (void)saveImageToCustomAlbumWithImage:(UIImage *)image albumName:(NSString *)albumName completionBlock:(void(^)(PHAsset *asset, NSString *error))completionBlock;
+- (void)saveImageToCustomAlbumWithImage:(UIImage *)image
+                              albumName:(NSString *)albumName
+                        completionBlock:(void (^)(PHAsset *asset, NSString *error))completionBlock;
 
 /**
  保存视频到系统相册
@@ -66,7 +77,8 @@
  @param url             视频 url
  @param completionBlock 回调
  */
-- (void)saveVideoToSystemAlbumWithURL:(NSURL *)url completionBlock:(void(^)(PHAsset *asset, NSString *error))completionBlock;
+- (void)saveVideoToSystemAlbumWithURL:(NSURL *)url
+                      completionBlock:(void (^)(PHAsset *asset, NSString *error))completionBlock;
 
 /**
  保存视频到自定义相册，没有则创建
@@ -75,7 +87,9 @@
  @param albumName       自定义相册名称
  @param completionBlock 回调
  */
-- (void)saveVideoToCustomAlbumWithURL:(NSURL *)url albumName:(NSString *)albumName completionBlcok:(void(^)(PHAsset *asset, NSString *error))completionBlock;
+- (void)saveVideoToCustomAlbumWithURL:(NSURL *)url
+                            albumName:(NSString *)albumName
+                      completionBlcok:(void (^)(PHAsset *asset, NSString *error))completionBlock;
 
 /**
  根据时间分组排序
@@ -85,7 +99,8 @@
 
  @return 分组结果
  */
-- (NSArray<MSTMoment *> *)sortByMomentType:(MSTImageMomentGroupType)momentType assets:(NSArray <MSTAssetModel *>*)models;
+- (NSArray<MSTMoment *> *)sortByMomentType:(MSTImageMomentGroupType)momentType
+                                    assets:(NSArray <MSTAssetModel *> *)models;
 
 
 /**
@@ -101,7 +116,8 @@
  @param fetchResult     相册信息
  @param completionBlock 回调
  */
-- (void)getMSTAssetModelWithPHFetchResult:(PHFetchResult *)fetchResult completionBlock:(void(^)(NSArray <MSTAssetModel *>*models))completionBlock;
+- (void)getMSTAssetModelWithPHFetchResult:(PHFetchResult *)fetchResult
+                          completionBlock:(void (^)(NSArray <MSTAssetModel *> *models))completionBlock;
 
 /**
  读取缩略图
@@ -110,7 +126,9 @@
  @param width           图片宽度，宽高比为 1:1，scale 默认为 2.0
  @param completionBlock 回调
  */
-- (void)getThumbnailImageFromPHAsset:(PHAsset *)asset photoWidth:(CGFloat)width completionBlock:(void(^)(UIImage *result, NSDictionary *info))completionBlock;
+- (void)getThumbnailImageFromPHAsset:(PHAsset *)asset
+                          photoWidth:(CGFloat)width
+                     completionBlock:(void (^)(UIImage *result, NSDictionary *info))completionBlock;
 
 /**
  读取预览图片，宽度默认为屏幕宽度
@@ -119,7 +137,9 @@
  @param isHighQuality   是否是高质量，为 YES 时，scale 为设备屏幕的 scale， NO 时 scale 为 0.1
  @param completionBlock 回调
  */
-- (void)getPreviewImageFromPHAsset:(PHAsset *)asset isHighQuality:(BOOL)isHighQuality completionBlock:(void(^)(UIImage *result, NSDictionary *info, BOOL isDegraded))completionBlock;
+- (void)getPreviewImageFromPHAsset:(PHAsset *)asset
+                     isHighQuality:(BOOL)isHighQuality
+                   completionBlock:(void (^)(UIImage *result, NSDictionary *info, BOOL isDegraded))completionBlock;
 
 /**
  读取 Live Photo
@@ -127,7 +147,8 @@
  @param asset           live photo 内容
  @param completionBlock 回调
  */
-- (void)getLivePhotoFromPHAsset:(PHAsset *)asset completionBlock:(void(^)(PHLivePhoto *livePhoto, BOOL isDegraded))completionBlock;
+- (void)getLivePhotoFromPHAsset:(PHAsset *)asset
+                completionBlock:(void (^)(PHLivePhoto *livePhoto, BOOL isDegraded))completionBlock;
 
 /**
  读取选定照片
@@ -137,7 +158,10 @@
  @param width           最大图片宽度，isFullImage 为 NO 时生效
  @param completionBlock 回调
  */
-- (void)getPickingImageFromPHAsset:(PHAsset *)asset isFullImage:(BOOL)isFullImage maxImageWidth:(CGFloat)width completionBlock:(void(^)(UIImage *result, NSDictionary *info, BOOL isDegraded))completionBlock;
+- (void)getPickingImageFromPHAsset:(PHAsset *)asset
+                       isFullImage:(BOOL)isFullImage
+                     maxImageWidth:(CGFloat)width
+                   completionBlock:(void (^)(UIImage *result, NSDictionary *info, BOOL isDegraded))completionBlock;
 
 /**
  读取视频
@@ -145,7 +169,7 @@
  @param asset 视频内容
  @param completionBlock 回调
  */
-- (void)getAVPlayerItemFromPHAsset:(PHAsset *)asset completionBlock:(void(^)(AVPlayerItem *item))completionBlock;
+- (void)getAVPlayerItemFromPHAsset:(PHAsset *)asset completionBlock:(void (^)(AVPlayerItem *item))completionBlock;
 
 
 /**
@@ -154,5 +178,6 @@
  @param models 图片内容
  @param completionBlock 回调
  */
-- (void)getImageBytesWithArray:(NSArray <MSTAssetModel *>*)models completionBlock:(void(^)(NSString *result))completionBlock;
+- (void)getImageBytesWithArray:(NSArray <MSTAssetModel *> *)models
+               completionBlock:(void (^)(NSString *result))completionBlock;
 @end

@@ -10,5 +10,4 @@
 
 @interface MSTPhotoGridHeaderView : UICollectionReusableView
 @property (strong, nonatomic) UILabel *textLabel;
-
 @end

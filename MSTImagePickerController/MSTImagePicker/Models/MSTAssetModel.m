@@ -12,9 +12,9 @@
 
 + (instancetype)modelWithAsset:(PHAsset *)asset {
     MSTAssetModel *model = [MSTAssetModel new];
-    
+
     model.asset = asset;
-    
+
     return model;
 }
 
@@ -24,13 +24,13 @@
 
 - (MSTAssetModelMediaType)type {
     if (self.asset.mediaSubtypes == PHAssetMediaSubtypePhotoLive) return MSTAssetModelMediaTypeLivePhoto;
-    
+
     if (self.asset.mediaType == PHAssetMediaTypeImage) return MSTAssetModelMediaTypeImage;
-    
+
     if (self.asset.mediaType == PHAssetMediaTypeVideo) return MSTAssetModelMediaTypeVideo;
-    
+
     if (self.asset.mediaType == PHAssetMediaTypeAudio) return MSTAssetModelMediaTypeAudio;
-    
+
     return MSTAssetModelMediaTypeUnkown;
 }
 
@@ -46,6 +46,10 @@
 }
 
 - (NSString *)debugDescription {
-    return [NSString stringWithFormat:@"<%@: %p> identifier:%@ | type: %zi", [self class], self, self.identifier, self.type];
+    return [NSString stringWithFormat:@"<%@: %p> identifier:%@ | type: %zi",
+                                      [self class],
+                                      self,
+                                      self.identifier,
+                                      self.type];
 }
 @end
